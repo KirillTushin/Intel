@@ -1,0 +1,58 @@
+/*********************
+Tushin Kirill
+
+Gnom
+
+**********************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+void gnom (int*,int);
+
+int main()
+{
+    int i, N;
+
+    printf(" Enter the number of array elements: ");
+
+    scanf("%d",&N);
+
+    int *m = (int *) malloc ( N*sizeof(int));
+
+    printf("\n Enter the array elements:\n");
+
+    for (i = 0; i < N; ++i)
+
+        scanf("%d", &m[i]);
+
+    gnom ( m, N);
+
+    for (i = 0; i < N; ++i)
+
+        printf("%d ",m[ i ]);
+
+    printf("\n");
+
+    return 0;
+}
+
+
+void gnom (int* a, int m)
+{
+    int i = 1;
+
+    while(i < m)
+    {
+        if(i == 0 || a[i - 1] <= a[i])
+            i++;
+        else
+        {
+            int pr = a[i];
+            a[i] = a[i - 1];
+            a[i - 1] = pr;
+            i--;
+        }
+    }
+}
