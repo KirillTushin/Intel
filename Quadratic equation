@@ -1,0 +1,115 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <assert.h>
+
+/************************************************
+
+Tushin Kirill
+
+Quadratic equation
+
+*************************************************/
+
+int checkErrorDouble(char str[15]);           //input validation
+
+double strToDooble(double v);                  //strToDooble
+
+double kvadrat(double a1,double b1,double c1 ,double *x1 ,double *x2);      //solution of the quadratic equation
+
+int main()
+{
+    double x1, x2;
+    double a,b,c;
+
+    printf(" a=");
+    a=strToDooble(a);  //Enter the coefficient A, and check it.
+
+    if (a==0)
+    {
+        printf("Ne kvadratnie uravnenie.\n");
+        assert(a!=0);
+    }
+
+    printf("\n b=");
+    b=strToDooble(b);  //enter the coefficient B, and check it
+
+    printf("\n c=");
+    c=strToDooble(c);  //enter the coefficient C, and check it
+
+
+    int j = kvadrat (a, b, c, &x1, &x2);      // j-number of roots in equation
+    if (j == 2)
+    {
+        printf("\n Koren1= %f \n Koren2= %f", x1, x2);
+
+
+    }else if (j == 1)
+    {
+        printf("\n Koren=%f",x1);
+    } else
+        printf("\n Korney net");
+
+    return 0;
+}
+
+
+int checkErrorDouble(char str[15])
+{
+    int i = 0;
+    int point=0;
+
+        while(str[i]!= '\0')
+        {
+            if(str[i] > '9' || str[i] < '0' && str[i] != '.' && str[i] !='-' && str[i] !='+')
+            {
+                assert (0);
+            }
+            if (str[i]=='.')
+            {
+                point++;
+                assert (point<=1);
+            }
+            i++;
+            assert (str[i]!='-' && str[i] !='+');
+        }
+        return 0;
+}
+
+double strToDooble(double v)
+{
+    char str[15]={};
+
+    scanf("%s", str);
+
+    checkErrorDouble(str);
+
+    v = atof( str );
+
+    return v;
+}
+
+
+double kvadrat(double a1,double b1,double c1, double *x1, double *x2)
+{
+    int n;
+    int D = b1 * b1 - 4 * a1 * c1;
+    if (D > 0)
+    {
+        *x1 = (-b1 - sqrt(D)) / (2 * a1);
+        *x2 = (-b1 + sqrt(D)) / (2 * a1);
+        n = 2;
+    }
+    else if (D == 0)
+    {
+        *x1 = -b1 / (2 * a1);
+        *x2 = *x1;
+         n = 1;
+    }
+    else
+    {
+        *x1 = *x2 = 0;
+         n = 0;
+    }
+    return n;
+}
