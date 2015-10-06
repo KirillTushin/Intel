@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/********************************
+ * 
+ * Tushin Kirill
+ * MergingSort 
+ * 
+ * 
+ * ******************************/
+
+void MergeSort(int *sarr, int start, int end);
+void Merge(int *sarr, int first, int last);
+
+int main()
+{
+    int N;
+    printf(" Enter the number of array elements: ");
+    scanf("%d", &N );
+
+    int *s = ( int* )malloc( N*sizeof(int) );
+
+    printf("\n Enter the array elements:\n");
+
+    for (int i = 0; i < N ; i++)
+        scanf("%d" , &s[i]);
+
+    MergeSort(s ,0, N-1);
+
+    for (int i = 0; i < N ; i++)
+        printf("%d   ", s[i]);
+
+}
+void MergeSort(int *sarr, int start, int end)
+{
+
+    if(start<end)
+    {
+        MergeSort(sarr, start, (start+end)/2);
+        MergeSort(sarr, (start+end)/2 +1, end);
+
+        Merge(sarr, start, end);
+    }
+}
+
+
+void Merge(int *sarr, int first, int last)
+{
+    int left_iterator, right_iterator,middle;
+    int *mas = (int*)malloc((last-first)*sizeof(int));
+
+    middle = (first+last)/2;
+    left_iterator = first;
+    right_iterator = middle + 1;
+
+    for(int i = first; i <= last; i++)
+    {
+        if((left_iterator <= middle) && ((right_iterator > last) || (sarr[left_iterator] < sarr[right_iterator])))
+        {
+            *(mas+i-first) = sarr[left_iterator];
+            left_iterator++;
+        }else
+        {
+            *(mas+i-first) = sarr[right_iterator];
+            right_iterator++;
+        }
+    }
+    for (int i =first; i<= last; i++)
+    sarr[i] = *(mas+i-first);
+}
+
