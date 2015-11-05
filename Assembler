@@ -171,7 +171,7 @@ int DIV(int* t,char arr[])
 	return 0;
 }
 
-int strtoInt(int *t,char arr[])
+int strtoInt(int *t,char arr[])				//переводим из char в int
 {
 	int a = 0;
 	int p = *t;
