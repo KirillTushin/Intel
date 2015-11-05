@@ -21,7 +21,7 @@ typedef struct Stack_tag
 } Stack_t;
 
 
-Stack_t* createStack()		//создаем стек
+Stack_t* createStack()				//создаем стек
 {
     Stack_t* out = NULL;
     out = malloc(sizeof(Stack_t));
@@ -47,7 +47,7 @@ void deleteStack(Stack_t **stack)		//удаляем стек
     *stack = NULL;
 }
 
-void resize(Stack_t *stack)		//изменяем размер стека если не хватает места
+void resize(Stack_t *stack)			//изменяем размер стека если не хватает места
 {
     stack->size *= MULTIPLIER;
     stack->data = realloc(stack->data, stack->size * sizeof(int));
@@ -57,7 +57,7 @@ void resize(Stack_t *stack)		//изменяем размер стека если
     }
 }
 
-void push(Stack_t *stack, int value) {
+void push(Stack_t *stack, int value) {		//PUSH
     if (stack->top >= stack->size) {
         resize(stack);
     }
@@ -65,7 +65,7 @@ void push(Stack_t *stack, int value) {
     stack->top++;
 }
 
-int pop(Stack_t *stack) {
+int pop(Stack_t *stack) {			//POP
     if (stack->top == 0) {
        assert(0);
     }
@@ -78,8 +78,7 @@ int pop(Stack_t *stack) {
 int main() 
 {
     char c;
-    
-	int a = 0;
+    int a = 0;
 	
     Stack_t *stack = createStack();
 	
@@ -89,7 +88,7 @@ int main()
 	
 	while(1)
 	{
-		c = fgetc(mf);						//Подсчитываем их количество
+		c = fgetc(mf);						//Подсчитываем количество символов
 		if(c == EOF)
 			break;
 		a++;
@@ -108,7 +107,7 @@ int main()
 		{
 			char z = fgetc(mf);
 			z = fgetc(mf);
-			while(1)		//код пробела =32  код перевода строки =10
+			while(1)		//код пробела =32  код перевода строки =10 EOF =-1
 			{
 				if(z == 32)
 					break;
@@ -116,7 +115,7 @@ int main()
 					break;
 				if(z == -1)
 					break;
-				g = g*10 + (z-'0');
+				g = g*10 + (z-'0');	//переводим из char в число
 				z = fgetc(mf);
 			}
 			push(stack, g);
@@ -136,12 +135,12 @@ int main()
 			push(stack,-(pop(stack) - pop(stack)));
 			p = fgetc(mf);
 		}
-		if(p - '0' == 5)
+		if(p - '0' == 5)			//MUL
 		{
 			push(stack, pop(stack)*pop(stack));
 			p = fgetc(mf);
 		}
-		if(p - '0' == 6)
+		if(p - '0' == 6)			//DIV
 		{
 			push(stack, pop(stack)/pop(stack));
 			p = fgetc(mf);
@@ -149,7 +148,7 @@ int main()
 		t++;
 	}
 	printf("%d ", pop(stack));
-
+	deleteStack(&stack);		//удаляем стек
     
     return 0;
 }
