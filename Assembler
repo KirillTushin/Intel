@@ -26,7 +26,7 @@ int main (void)
 	int a = 0;
 	int i = 0;
 
-	mf = fopen ("test.txt","r");			//Считваем из файла команды
+	mf = fopen ("test.asem","r");			//Считваем из файла команды
 	
 	while(1)
 	{
@@ -37,7 +37,7 @@ int main (void)
 	}
 	sym = malloc((a+1)*sizeof(char));		//создаем массив из символов	
 
-	mf = fopen ("test.txt","r");
+	mf = fopen ("test.asem","r");
 	
 	while (1)
 	{
@@ -48,42 +48,42 @@ int main (void)
 	}
 	i--;
 		
-	mf = fopen ("my.asem","w");			//будем записывать в файл my.asem
+	mf = fopen ("my.forcpu","w");			//будем записывать в файл my.asem
 	
 	int t = 0;
 	while(t < i)
 	{
-		if(sym[t] == '\n')
-			t++;
 		if(PUSH(&t, sym) == 1)
 		{
-			fprintf(mf,"%d%d", 1, strtoInt(&t, sym));			//Функции заносим в новый файл как char а число после PUSH как int
+			fprintf(mf,"%d %d ", 1, strtoInt(&t, sym));			//Функции заносим в новый файл как char а число после PUSH как int
 			t++;
 		}
+		if(sym[t] == '\n')
+			t++;
 		if(POP(&t, sym) == 2)
 		{
-			fprintf(mf,"%d", 2);	
+			fprintf(mf,"%d ", 2);	
 			t++;
 		}
 		if(ADD(&t, sym) == 3)
 		{
-			fprintf(mf,"%d", 3);	
+			fprintf(mf,"%d ", 3);	
 			t++;
 		}
 		if(SUB(&t, sym) == 4)
 		{
-			fprintf(mf,"%d", 4);	
+			fprintf(mf,"%d ", 4);	
 			t++;
 		}
 		
 		if(MUL(&t, sym) == 5)
 		{
-			fprintf(mf,"%d", 5);	
+			fprintf(mf,"%d ", 5);	
 			t++;
 		}
 		if(DIV(&t, sym) == 6)
 		{
-			fprintf(mf,"%d", 6);	
+			fprintf(mf,"%d ", 6);	
 			t++;
 		}
 	}
@@ -96,10 +96,10 @@ int main (void)
 
 int PUSH(int* t,char arr[])					//сравниваем команды с введенными командами
 {
-	if (arr[*t] == 'P')
-		if(arr[*t+1] == 'U')
-			if(arr[*t+2] == 'S')
-				if(arr[*t+3] == 'H')
+	if (arr[*t] == 'P' ||arr[*t] == 'p')
+		if(arr[*t+1] == 'U' ||arr[*t+1] == 'u')
+			if(arr[*t+2] == 'S' ||arr[*t+2] == 's')
+				if(arr[*t+3] == 'H' ||arr[*t+3] == 'h')
 				{
 					if(arr[*t+4] ==' ')
 						*t+=1;
@@ -112,9 +112,9 @@ int PUSH(int* t,char arr[])					//сравниваем команды с вве�
 
 int POP(int* t,char arr[])
 {
-	if (arr[*t] == 'P')
-		if(arr[*t+1] == 'O')
-			if(arr[*t+2] == 'P')
+	if (arr[*t] == 'P' || arr[*t] == 'p')
+		if(arr[*t+1] == 'O' ||arr[*t+1] == 'o')
+			if(arr[*t+2] == 'P' ||arr[*t+2] == 'p')
 			{
 				*t+=3;
 				return 2;
@@ -124,9 +124,9 @@ int POP(int* t,char arr[])
 
 int ADD(int* t,char arr[])
 {
-	if (arr[*t] == 'A')
-		if(arr[*t+1] == 'D')
-			if(arr[*t+2] == 'D')
+	if (arr[*t] == 'A' || arr[*t] =='a')
+		if(arr[*t+1] == 'D' || arr[*t+1] =='d')
+			if(arr[*t+2] == 'D' || arr[*t+2] =='d')
 			{
 				*t+=3;
 				return 3;
@@ -136,9 +136,9 @@ int ADD(int* t,char arr[])
 
 int SUB(int* t,char arr[])
 {
-	if (arr[*t] == 'S')
-		if(arr[*t+1] == 'U')
-			if(arr[*t+2] == 'B')
+	if (arr[*t] == 'S' ||arr[*t] == 's')
+		if(arr[*t+1] == 'U' || arr[*t+1] =='u')
+			if(arr[*t+2] == 'B' || arr[*t+2] =='b')
 			{
 				*t+=3;
 				return 4;
@@ -148,9 +148,9 @@ int SUB(int* t,char arr[])
 
 int MUL(int* t,char arr[])
 {
-	if (arr[*t] == 'M')
-		if(arr[*t+1] == 'U')
-			if(arr[*t+2] == 'L')
+	if (arr[*t] == 'M' || arr[*t] =='m')
+		if(arr[*t+1] == 'U' ||arr[*t+1] == 'u')
+			if(arr[*t+2] == 'L' ||arr[*t+2] == 'l')
 			{
 				*t+=3;
 				return 5;
@@ -161,9 +161,9 @@ int MUL(int* t,char arr[])
 
 int DIV(int* t,char arr[])
 {
-	if (arr[*t] == 'D')
-		if(arr[*t+1] == 'I')
-			if(arr[*t+2] == 'V')
+	if (arr[*t] == 'D' || arr[*t] =='d')
+		if(arr[*t+1] == 'I' ||arr[*t+1] == 'i')
+			if(arr[*t+2] == 'V' ||arr[*t+2] == 'v')
 			{
 				*t+=3;
 				return 6;
