@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	char arr[STR] = {'0','0','0','0','0','0','0','0','0','0'};
 	
 	
-	if (!(fin = fopen("asem.txt", "r"))) 
+	if (!(fin = fopen("test.asem", "r"))) 
 	{ 
 		printf ("can't open a file for read\n"); 
 		return -1; 
@@ -53,13 +53,13 @@ int main(int argc, char **argv)
 	
 	
 	//==================================================================
-	if ((fin = fopen("asem.txt", "r")) == NULL) 
+	if ((fin = fopen("test.asem", "r")) == NULL) 
 	{ 
 		printf ("can't open a file for read\n"); 
 		return -1; 
 	}
 	
-	if ((fout = fopen("forcpu.txt", "w")) == NULL) 
+	if ((fout = fopen("my.forcpu", "w")) == NULL) 
 	{ 
 		printf ("can't open a file for writing\n"); 
 		return -1; 
