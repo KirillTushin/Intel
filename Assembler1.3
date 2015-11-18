@@ -1,9 +1,6 @@
 /*
  * asem1.3.c
- * 
  * Tushin Kirill
- * 
- * 
  */
 
 #include <stdio.h>
@@ -19,13 +16,13 @@ void clear(char * arr);
 		if(strcmp(arr,Mass[p].name) == 0){\
 			fprintf(fout, "%d ", Mass[p].num);\
 			if(Mass[p].arg){\
-				fscanf(fin,"%d", &a);\
-				fprintf(fout, "%d ", a);}}
+				fscanf(fin,"%d", &ar);\
+				fprintf(fout, "%d ", ar);}}
 
 int main()
 {
 	FILE *fin, *fout;
-	int a = 0, i = 0;
+	int a = 0, i = 0, ar;
 	char c;
 	char arr[STR] = {};
 	
