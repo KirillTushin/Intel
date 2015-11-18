@@ -1,6 +1,9 @@
 /*
  * asem1.3.c
+ * 
  * Tushin Kirill
+ * 
+ * 
  */
 
 #include <stdio.h>
@@ -15,7 +18,7 @@ void clear(char * arr);
 #define DEF_CMD(p)\
 		if(strcmp(arr,Mass[p].name) == 0){\
 			fprintf(fout, "%d ", Mass[p].num);\
-			if(p == 0){\
+			if(Mass[p].arg){\
 				fscanf(fin,"%d", &a);\
 				fprintf(fout, "%d ", a);}}
 
