@@ -15,7 +15,9 @@ struct Cmd
 	int num;
 	const char*name;
 	int arg;
+	int *func;
 };
+
 
 const struct Cmd Mass[] = 
 {
@@ -26,3 +28,22 @@ const struct Cmd Mass[] =
 	{cmd_Mul, "MUL", 0},
 	{cmd_Div, "DIV", 0}
 };
+
+#define PUSH\
+		{fscanf(mf, "%d", &g);\
+		push(stack, g);}
+		
+#define POP\
+		pop(stack)
+
+#define ADD\
+		push(stack, pop(stack) + pop(stack))
+
+#define SUB\
+		push(stack,-(pop(stack) - pop(stack)))
+		
+#define MUL\
+		push(stack, pop(stack)*pop(stack))
+		
+#define DIV\
+		push(stack, pop(stack)/pop(stack))
