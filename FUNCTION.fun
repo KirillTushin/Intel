@@ -7,9 +7,9 @@ enum comands
 	cmd_Mul = 5,
 	cmd_Div = 6
 };
-
+//============================================================
 #define NumberFunction (sizeof(Mass))/(sizeof(struct Cmd))
-
+//============================================================
 struct Cmd
 {
 	int num;
@@ -17,8 +17,7 @@ struct Cmd
 	int arg;
 	int *func;
 };
-
-
+//============================================================
 const struct Cmd Mass[] = 
 {
 	{cmd_Push, "PUSH", 1},
@@ -28,22 +27,17 @@ const struct Cmd Mass[] =
 	{cmd_Mul, "MUL", 0},
 	{cmd_Div, "DIV", 0}
 };
-
+//============================================================
 #define PUSH\
 		{fscanf(mf, "%d", &g);\
-		push(stack, g);}
-		
+		push(stack, g); a--;}
 #define POP\
 		pop(stack)
-
 #define ADD\
 		push(stack, pop(stack) + pop(stack))
-
 #define SUB\
 		push(stack,-(pop(stack) - pop(stack)))
-		
 #define MUL\
 		push(stack, pop(stack)*pop(stack))
-		
 #define DIV\
 		push(stack, pop(stack)/pop(stack))
