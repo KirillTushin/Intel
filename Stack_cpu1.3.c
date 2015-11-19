@@ -14,14 +14,6 @@
 
 #define MULTIPLIER 2	//при недстатке памяти увечличиваем ее в MULTIPLIER раз
 
-
-
-#define IF_CPU(l)\
-		if(p == l){\
-			if(Mass[l].arg)\
-				fscanf(mf, "%d", &g);\
-		&Mass[l].func;}\
-			
 typedef struct Stack_tag 
 {
     int* data;		//указатель на данные
