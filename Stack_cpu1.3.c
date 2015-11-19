@@ -3,15 +3,12 @@
  * Stack_cpu.c
  */
 
-
 #include <stdio.h>
 #include <assert.h>
 #include <string.h> 
 #include <stdlib.h>
 #include "FUNCTION.fun"
-
 #define INIT_SIZE 50 //начальный размер массива
-
 #define MULTIPLIER 2	//при недстатке памяти увечличиваем ее в MULTIPLIER раз
 
 typedef struct Stack_tag 
@@ -20,8 +17,7 @@ typedef struct Stack_tag
     unsigned size;	//размер стека
     unsigned top;	//число элементов
 } Stack_t;
-
-
+//======================================================================
 Stack_t* createStack()				//создаем стек
 {
     Stack_t* out = NULL;
@@ -40,14 +36,14 @@ Stack_t* createStack()				//создаем стек
     out->top = 0;
     return out;
 }
-
+//======================================================================
 void deleteStack(Stack_t **stack)		//удаляем стек
 {
     free((*stack)->data);
     free(*stack);
     *stack = NULL;
 }
-
+//======================================================================
 void resize(Stack_t *stack)			//изменяем размер стека если не хватает места
 {
     stack->size *= MULTIPLIER;
@@ -57,7 +53,7 @@ void resize(Stack_t *stack)			//изменяем размер стека есл�
         assert(0);
     }
 }
-
+//======================================================================
 void push(Stack_t *stack, int value) {		//PUSH
     if (stack->top >= stack->size) {
         resize(stack);
@@ -65,7 +61,7 @@ void push(Stack_t *stack, int value) {		//PUSH
     stack->data[stack->top] = value;
     stack->top++;
 }
-
+//======================================================================
 int pop(Stack_t *stack) {			//POP
     if (stack->top == 0) {
        assert(0);
@@ -73,17 +69,14 @@ int pop(Stack_t *stack) {			//POP
     stack->top--;
     return stack->data[stack->top];
 }
-
-
+//=====================================================================
 int main() 
 {
     char c;
-    int a = 0;
-	
-    Stack_t *stack = createStack();
+    int a = 0, g, p;
+	Stack_t *stack = createStack();
 	
 	FILE *mf;
-	
 	mf = fopen ("my.forcpu","r");
 	
 	while(1)
@@ -95,15 +88,10 @@ int main()
 			a++;
 	}
 	fclose(mf);
-		
-	int t = 0;
-	
 	mf = fopen ("my.forcpu","r");
 	
-	while(t < a)
+	while(a)
 	{
-		int g = 0;
-		int p;
 		fscanf(mf, "%d", &p);
 		if(p == cmd_Push) 
 			PUSH;
@@ -117,11 +105,9 @@ int main()
 			MUL;
 		if(p == cmd_Div)
 			DIV;
-
-		t++;
+		a--;
 	}
-	printf("%d ", POP);
-	deleteStack(&stack);		//удаляем стек
-    
+	printf("%d ", pop(stack));
+	deleteStack(&stack);
     return 0;
 }
