@@ -1,0 +1,50 @@
+#include <iostream>
+#include <cassert>
+#define N 100
+
+//======================================================================
+class Cstack
+{
+	private :
+		int data_[N];
+		int size_;
+	public:
+		Cstack();
+		~Cstack();
+		void push_back(int val);
+		int pop();
+};
+//======================================================================
+void Cstack :: push_back(int val)
+{
+	if(N == size_)
+		assert(-1);
+	data_[size_++] = val;
+	if(N == size_)
+		assert(-1);
+}
+//======================================================================
+Cstack::Cstack():
+size_(0)
+{
+	int *data_ = new int[N];
+	int t;
+	for(t = 0; t < N; t++)
+		data_[t] = 0;
+}
+//======================================================================
+Cstack::~Cstack()
+{
+	size_ = 0;
+	int t;
+	for(t = 0; t < N; t++)
+		data_[t] = -2016;
+	//delete [] data_;
+}
+//======================================================================
+int Cstack::pop()
+{
+	if(size_ == 0)
+		assert(-2);
+	return data_[--size_];
+}
